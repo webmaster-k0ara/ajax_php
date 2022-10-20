@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="jquery-3.6.1.min.js"></script>
+</head>
+
+<body>
+  <h1>メンバーリスト</h1>
+  <label for="">
+    <select class="group">
+      <option hidden>選択してください</option>
+      <option value="groupA">グループA</option>
+      <option value="groupB">グループB</option>
+      <option value="groupC">グループC</option>
+    </select>
+  </label>
+  <div id="loading">
+    <img src="./img/Fancy pants.gif" alt="">
+    <p>loading...</p>
+  </div>
+  <div>
+    <ul id="member-list"></ul>
+  </div>
+  <div>
+    <p id="error"></p>
+  </div>
+  <script>
+
+    $(".group").change(() => {
+      $('#loading').show();
+      $('#member-list').empty();
+      setTimeout(() => getMemberList('test'), 2000)
+    });
+
+    function getMemberList($text) {
+      console.log($text)
+      $.ajax({
+        type: "GET",
+        data: "json",
+        url: "./api.php"
+      })
+        .done((data) => {
+          $('#loading').hide();
+          console.log("sucsess", data);
+          $('#content').text(JSON.stringify(data));
+          const group = $(".group").val();
+          const list = data[group];
+          list.map(member => {
+            $('#member-list').append($('<li/>')
+              .text(`名前：${member.name} 年齢：${member.age}`));
+          })
+        })
+        .fail((error) => {
+          console.log("fail", error);
+          const errorMessage = `status:${error.status} $msg:{error.statusText}`;
+          $('#error').text(errorMessage);
+        })
+        .always(() => {
+          console.log("通信完了");
+        });
+    }
+
+  </script>
+</body>
+<style>
+  #loading {
+    display: none;
+  }
+
+</style>
+
+</html>

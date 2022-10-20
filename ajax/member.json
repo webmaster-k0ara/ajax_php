@@ -1,0 +1,44 @@
+{
+  "groupA": [
+    {
+      "name": "tanaka1",
+      "age" : 20
+    },
+    {
+      "name": "tanaka2",
+      "age" : 20
+    },
+    {
+      "name": "tanaka3",
+      "age" : 20
+    }
+  ],
+  "groupB": [
+    {
+      "name": "sasaki1",
+      "age" : 20
+    },
+    {
+      "name": "sasaki2",
+      "age" : 20
+    },
+    {
+      "name": "sasaki3",
+      "age" : 20
+    }
+  ],
+  "groupC": [
+    {
+      "name": "nakano1",
+      "age" : 20
+    },
+    {
+      "name": "nakano2",
+      "age" : 20
+    },
+    {
+      "name": "nakano3",
+      "age" : 20
+    }
+  ]
+}
